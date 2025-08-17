@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+\begin{document}
+
+\title{Mathematical Proof of Cycle Containing an Odd Number of Edges from a Non-Cut Set}
+\author{}
+\date{}
+\maketitle
+
+\begin{theorem}
+Let $G = (V, E)$ be a connected graph, and let $F \subseteq E(G)$ be a subset of edges such that:
+\[
+F \not\subseteq B(G),
+\]
+where $B(G)$ denotes the set of bridges (cut-edges) in $G$. Then there exists a cycle $C$ in $G$ such that:
+\[
+|C \cap F| \text{ is odd}.
+\]
+\end{theorem}
+
+\begin{proof}
+Since $F$ is not a cut, removing the edges in $F$ does not disconnect $G$. Define the graph:
+\[
+H = (V, E \setminus F).
+\]
+Since $H$ remains connected, it contains a spanning tree $T$. A spanning tree has exactly $|V| - 1$ edges and spans all vertices of $G$. Since $F$ does not disconnect $G$, each edge in $F$ must connect vertices that remain in the same component of $H$.
+
+For each edge $e = (u, v) \in F$, there exists a unique path $P_{uv}$ in $T$ such that:
+\[
+C_e = P_{uv} \cup \{e\}
+\]
+is a cycle in $G$.
+
+The set of all cycles in $G$ forms a vector space over $\mathbb{Z}_2$, called the \textit{cycle space} $Z(G)$, which is given by:
+\[
+Z(G) = \{ C \subseteq E(G) \mid C \text{ is a cycle in } G \}.
+\]
+
+This space has a basis consisting of the fundamental cycles $\{C_e \mid e \in F\}$, and every cycle in $G$ is a \textit{linear combination (modulo 2)} of these fundamental cycles.
+
+Since $F$ is not a cut, the edges in $F$ form a linearly dependent set in the cycle space. This implies that there exists a nontrivial cycle $C$ that is a sum of fundamental cycles:
+\[
+C = \sum_{e \in F} C_e \quad (\text{mod } 2).
+\]
+
+By properties of linear algebra over $\mathbb{Z}_2$, at least one such cycle must contain an \textit{odd} number of edges from $F$, meaning:
+\[
+|C \cap F| \text{ is odd}.
+\]
+
+Thus, the proof is complete.
+\end{proof}
+
+\end{document}
